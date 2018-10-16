@@ -19,6 +19,8 @@
  var bgPic=null;
 //1.2创建全局变量保存海葵对象
  var ane=null;
+//1.3创建全局变量保存食物对象
+ var fruit=null;
 //2：创建入口函数
 function game(){
     init();
@@ -41,6 +43,10 @@ function init(){
     //3.3:创建海葵对象并且调用初始化方法
     ane=new aneObj();
     ane.init();
+
+    //3.4创建一个食物对象并且调用初始化方法
+    fruit=new fruitObj();
+    fruit.init();
 }
 //4：创建一个绘制函数
 function gameloop(){
@@ -50,6 +56,8 @@ function gameloop(){
     drawBackground();
     //4.6:调用绘制海葵的方法
     ane.draw();
+    //4.7:调用绘制食物的方法
+    fruit.draw();
 }
 //5：当index.html加载结束调用入口函数
 document.body.onload=game;
