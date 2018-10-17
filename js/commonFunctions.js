@@ -9,7 +9,13 @@ window.requestAnimFrame = (function() {
 		};
 })();
 
-
+/**
+ * 计算两个对象之间距离
+ * @param {*} x1 源对象
+ * @param {*} y1 
+ * @param {*} x2 目标对象
+ * @param {*} y2 
+ */
 function calLength2(x1, y1, x2, y2) {
 	return Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
 }
@@ -36,6 +42,13 @@ function lerpAngle(a, b, t) {
 	return a + d * t;
 }
 
+/**
+ * 让源对象向目标慢慢移动操作
+ * @param {*} aim 目标对象位置
+ * @param {*} cur 源对象位置
+ * @param {*} ratio 速度 0.9[快]~0.999[慢]
+ * @param 
+ */
 function lerpDistance(aim, cur, ratio) {
 	var delta = cur - aim;
 	return aim + delta * ratio;

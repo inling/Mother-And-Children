@@ -22,12 +22,12 @@ fruitObj.prototype.num=30;
 //3.添加方法食物初始化
 fruitObj.prototype.init=function(){
     for(var i=0;i<this.num;i++){
-        this.alive[i]=true;
-        this.x[i]=i*25+Math.random()*30;
-        this.y[i]=350;
+        this.alive[i]=false;                 //所有食物初始状态 false 不可见
+        this.x[i]=0;                         //坐标 0 0
+        this.y[i]=0;                         
         this.l[i]=0;
         this.spd[i]=Math.random()*0.017+0.03;
-        this.fruitType[i]=Math.random()<0.9?"blue":"orange";
+        this.fruitType[i]="";                //颜色未知
     }
     this.orange.src="./src/fruit.png";
     this.blue.src="./src/blue.png";
@@ -68,3 +68,35 @@ fruitObj.prototype.draw=function(){
 }
 //5.将fruit.js加载index.html
 //6.在main.js创建对象并且调用相应方法
+//7.创建全局函数，监听画布食物数量 不足15个活动出生
+function fruitMonitor(){
+    var sum=0;
+    for(var i=0;i<fruit.num;i++){
+        if(fruit.alive[i]) sum++;
+    }
+    if(sum<15){
+        sendFruit();
+        return;
+    }
+}
+//8.创建全局函数，从食物中挑选一个不活动食物
+function sendFruit(){
+    for(var i=0;i<fruit.num;i++){
+        if(!fruit.alive[i]){
+            fruit.born(i);
+            return;
+        }
+    }
+}
+//9.为食物类中添加方法，出生【状态;宽度;类型;x;y】
+fruitObj.prototype.born=function(i){
+    //查找一个海葵 在海葵头顶出生
+    var aneID=Math.floor(Math.random()*ane.num);
+    this.x[i]=ane.x[aneID];
+    this.y[i]=canHeight-ane.len[aneID];
+    this.l[i]=0;
+    this.alive[i]=true;
+    this.fruitType[i]=Math.random()<0.9?"blue":"orange";
+}
+//10.在main.js中调用fruitMonitor方法
+
