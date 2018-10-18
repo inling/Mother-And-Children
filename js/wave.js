@@ -18,9 +18,20 @@ waveObj.prototype.init=function(){
 //4.特效光环对象绘制方法
 waveObj.prototype.draw=function(){
     ctx1.save();
+    ctx1.lineWidth=2;       //设置边框阴影
+    ctx1.shadowBlur=10;     //设置阴影宽度
+    ctx1.shadowColor="red"; //设置阴影颜色
     for(var i=0;i<this.num;i++){
+        //当前光环活动;变大;变淡
         if(this.alive[i]){
+            this.r[i]+=deltaTime*0.02;     //变大
+            if(this.r[i]>50){
+                this.alive[i]=false;
+                break;
+            }
+            var alpha=1-this.r[i]/50;
             ctx1.beginPath();
+            ctx1.strokeStyle="rgba(255,255,255,"+alpha+")";
             ctx1.arc(this.x[i],this.y[i],this.r[i],0,2*Math.PI);
             ctx1.stroke();
         }
