@@ -92,8 +92,10 @@ function sendFruit(){
 fruitObj.prototype.born=function(i){
     //查找一个海葵 在海葵头顶出生
     var aneID=Math.floor(Math.random()*ane.num);
-    this.x[i]=ane.x[aneID];
-    this.y[i]=canHeight-ane.len[aneID];
+    //this.x[i]=ane.x[aneID];
+    //this.y[i]=canHeight-ane.len[aneID];
+    this.x[i]=ane.headx[aneID];
+    this.y[i]=ane.heady[aneID];
     this.l[i]=0;
     this.alive[i]=true;
     this.fruitType[i]=Math.random()<0.9?"blue":"orange";
